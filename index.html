@@ -78,6 +78,14 @@
     background:var(--text-dim);
   }
   .tab.active .dot{ background:var(--accent); }
+  .tab .ficon{
+    flex:none;
+    width:14px; height:14px;
+    display:inline-flex;
+    color:var(--text-dim);
+    transition:color .2s ease;
+  }
+  .tab.active .ficon{ color:var(--accent); }
 
   main{ position:relative; z-index:1; max-width:880px; margin:0 auto; padding:0 24px; }
 
@@ -429,12 +437,30 @@
 <body>
 
 <nav class="tabbar" id="tabbar">
-  <button class="tab active" data-target="hero"><span class="dot"></span>inicio.md</button>
-  <button class="tab" data-target="mision"><span class="dot"></span>identidad.md</button>
-  <button class="tab" data-target="skills"><span class="dot"></span>skills.json</button>
-  <button class="tab" data-target="portafolio"><span class="dot"></span>portafolio/</button>
-  <button class="tab" data-target="contacto"><span class="dot"></span>contacto.json</button>
-  <button class="tab" data-target="pitch"><span class="dot"></span>pitch.txt</button>
+  <button class="tab active" data-target="hero">
+    <svg class="ficon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 11l9-8 9 8"/><path d="M5 10v10h14V10"/></svg>
+    <span class="dot"></span>inicio.md
+  </button>
+  <button class="tab" data-target="mision">
+    <svg class="ficon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><circle cx="9" cy="11" r="2"/><path d="M6 16c1-2 2.5-3 3-3s2 1 3 3"/><path d="M14 9h4M14 13h4"/></svg>
+    <span class="dot"></span>identidad.md
+  </button>
+  <button class="tab" data-target="skills">
+    <svg class="ficon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M8 4c-2 0-3 1-3 3v3c0 1-1 2-2 2 1 0 2 1 2 2v3c0 2 1 3 3 3"/><path d="M16 4c2 0 3 1 3 3v3c0 1 1 2 2 2-1 0-2 1-2 2v3c0 2-1 3-3 3"/></svg>
+    <span class="dot"></span>skills.json
+  </button>
+  <button class="tab" data-target="portafolio">
+    <svg class="ficon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M3 7a2 2 0 0 1 2-2h4l2 2h8a2 2 0 0 1 2 2v8a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V7Z"/></svg>
+    <span class="dot"></span>portafolio/
+  </button>
+  <button class="tab" data-target="contacto">
+    <svg class="ficon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"><path d="M6 3c1 0 2 .3 2 1.3 0 1-1 1.7-1 2.7 0 2 4 6 6 6 1 0 1.7-1 2.7-1 1 0 1.3 1 1.3 2 0 2-1.5 3-3 3-6 0-11-5-11-11 0-1.5 1-3 3-3Z"/></svg>
+    <span class="dot"></span>contacto.json
+  </button>
+  <button class="tab" data-target="pitch">
+    <svg class="ficon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="3" width="6" height="10" rx="3"/><path d="M6 11a6 6 0 0 0 12 0M12 17v3M9 20h6"/></svg>
+    <span class="dot"></span>pitch.txt
+  </button>
 </nav>
 
 <main>
@@ -633,7 +659,7 @@
         tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
       }
     });
-  }, { threshold: 0.4, rootMargin: '-80px 0px -50% 0px' });
+  }, { threshold: 0, rootMargin: '-96px 0px -65% 0px' });
   sections.forEach(sec => sec && navObserver.observe(sec));
 
   // Terminal typewriter effect
