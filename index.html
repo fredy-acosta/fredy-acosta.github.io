@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Fredy Enrrique Acosta Paz — Ingeniero de Sistemas & Desarrollador</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700;900&family=Fira+Code:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0D1117;
+    --surface: #161B22;
+    --surface-hi: #1C2330;
+    --accent: #58A6FF;
+    --accent-dim: rgba(88,166,255,0.18);
+    --text: #C9D1D9;
+    --text-dim: #7D8590;
+    --border: #262C36;
+    --sans: 'Roboto', 'Segoe UI', -apple-system, sans-serif;
+    --mono: 'Fira Code', 'Consolas', monospace;
+  }
+
+  *{ margin:0; padding:0; box-sizing:border-box; }
+
+  html{ scroll-behavior:smooth; }
+
+  body{
+    background:var(--bg);
+    color:var(--text);
+    font-family:var(--sans);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+
+  body::before{
+    content:'';
+    position:fixed; inset:0;
+    background-image:
+      linear-gradient(var(--border) 1px, transparent 1px),
+      linear-gradient(90deg, var(--border) 1px, transparent 1px);
+    background-size:64px 64px;
+    opacity:0.25;
+    pointer-events:none;
+    z-index:0;
+  }
+
+  a{ color:inherit; }
+
+  /* ---------- Editor tab nav ---------- */
+  .tabbar{
+    position:sticky; top:0; z-index:50;
+    display:flex;
+    background:var(--surface);
+    border-bottom:1px solid var(--border);
+    overflow-x:auto;
+    scrollbar-width:none;
+  }
+  .tabbar::-webkit-scrollbar{ display:none; }
+
+  .tab{
+    display:flex; align-items:center; gap:8px;
+    padding:12px 20px;
+    font-family:var(--mono);
+    font-size:0.82rem;
+    color:var(--text-dim);
+    white-space:nowrap;
+    border-right:1px solid var(--border);
+    cursor:pointer;
+    background:transparent;
+    border-top:2px solid transparent;
+    transition:color .2s ease, background .2s ease, border-color .2s ease;
+  }
+  .tab:hover{ color:var(--text); background:var(--surface-hi); }
+  .tab.active{ color:var(--accent); border-top-color:var(--accent); background:var(--bg); }
+  .tab .dot{
+    width:6px; height:6px; border-radius:50%;
+    background:var(--text-dim);
+  }
+  .tab.active .dot{ background:var(--accent); }
+
+  main{ position:relative; z-index:1; max-width:880px; margin:0 auto; padding:0 24px; }
+
+  section{ padding:96px 0; border-bottom:1px solid var(--border); }
+  section:last-of-type{ border-bottom:none; }
+
+  /* ---------- Hero / terminal ---------- */
+  .hero{
+    padding-top:72px;
+    display:flex; flex-direction:column; gap:28px;
+  }
+
+  .terminal{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:8px;
+    overflow:hidden;
+    box-shadow:0 20px 60px -20px rgba(0,0,0,0.6);
+  }
+  .terminal-head{
+    display:flex; align-items:center; gap:8px;
+    padding:10px 14px;
+    background:var(--surface-hi);
+    border-bottom:1px solid var(--border);
+  }
+  .terminal-head span{
+    width:11px; height:11px; border-radius:50%;
+    background:var(--border);
+  }
+  .terminal-head .path{
+    margin-left:10px;
+    font-family:var(--mono);
+    font-size:0.75rem;
+    color:var(--text-dim);
+  }
+  .terminal-body{
+    padding:24px 20px 28px;
+    font-family:var(--mono);
+    font-size:0.95rem;
+    color:var(--text-dim);
+    min-height:170px;
+  }
+  .terminal-body .key{ color:#7ee787; }
+  .terminal-body .str{ color:var(--accent); }
+  .terminal-body .punct{ color:var(--text-dim); }
+  .cursor{
+    display:inline-block; width:8px; height:1.1em;
+    background:var(--accent);
+    vertical-align:text-bottom;
+    animation:blink 1s step-end infinite;
+  }
+  @keyframes blink{ 50%{ opacity:0; } }
+
+  .role-line{
+    font-family:var(--mono);
+    font-size:1.05rem;
+    color:var(--text-dim);
+  }
+  .role-line strong{ color:var(--text); font-weight:500; }
+
+  h1{
+    font-size:clamp(2.1rem, 5vw, 3.4rem);
+    font-weight:900;
+    letter-spacing:-0.02em;
+    line-height:1.08;
+  }
+
+  /* ---------- Section headers ---------- */
+  h2{
+    font-size:1.7rem;
+    font-weight:700;
+    margin-bottom:36px;
+    display:flex; align-items:baseline; gap:10px;
+  }
+  h2 .ext{
+    font-family:var(--mono);
+    font-size:0.95rem;
+    color:var(--text-dim);
+    font-weight:400;
+  }
+
+  /* ---------- Reveal ---------- */
+  .reveal{
+    opacity:0;
+    transform:translateY(22px);
+    transition:opacity .6s ease, transform .6s ease;
+  }
+  .reveal.in{ opacity:1; transform:translateY(0); }
+
+  /* ---------- Mission/Vision cards ---------- */
+  .triad{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:1px;
+    background:var(--border);
+    border:1px solid var(--border);
+    border-radius:10px;
+    overflow:hidden;
+  }
+  .triad-item{
+    background:var(--surface);
+    padding:26px 22px;
+  }
+  .triad-item .label{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--accent);
+    letter-spacing:0.02em;
+    margin-bottom:12px;
+  }
+  .triad-item p{ color:var(--text); font-size:0.95rem; }
+
+  @media (max-width:720px){
+    .triad{ grid-template-columns:1fr; }
+  }
+
+  /* ---------- Skills ---------- */
+  .skill-group{ margin-bottom:28px; }
+  .skill-group:last-child{ margin-bottom:0; }
+  .skill-group .cat{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--text-dim);
+    margin-bottom:14px;
+  }
+  .tags{ display:flex; flex-wrap:wrap; gap:10px; }
+  .tag{
+    font-family:var(--mono);
+    font-size:0.88rem;
+    padding:8px 16px;
+    border:1px solid var(--border);
+    border-radius:6px;
+    background:var(--surface);
+    color:var(--text);
+    transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
+    cursor:default;
+  }
+  .tag:hover{
+    transform:translateY(-4px);
+    border-color:var(--accent);
+    box-shadow:0 10px 24px -8px var(--accent-dim), 0 0 0 1px var(--accent-dim);
+  }
+
+  /* ---------- Portfolio / file list ---------- */
+  .filelist{ display:flex; flex-direction:column; gap:2px; }
+  .fileitem{
+    display:grid;
+    grid-template-columns:170px 1fr;
+    gap:20px;
+    padding:20px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:8px;
+    margin-bottom:10px;
+    transition:border-color .2s ease, background .2s ease;
+  }
+  .fileitem:hover{ border-color:var(--accent); background:var(--surface-hi); }
+  .fileitem .fname{
+    font-family:var(--mono);
+    font-size:0.88rem;
+    color:var(--accent);
+    word-break:break-word;
+  }
+  .fileitem .fdesc{ font-size:0.92rem; color:var(--text); }
+  .fileitem .fdesc small{ display:block; color:var(--text-dim); margin-top:4px; font-size:0.82rem; }
+
+  @media (max-width:640px){
+    .fileitem{ grid-template-columns:1fr; gap:6px; }
+  }
+
+  /* ---------- Pitch ---------- */
+  .pitch-box{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:32px 28px;
+    position:relative;
+  }
+  .pitch-box .tag-label{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--text-dim);
+    margin-bottom:16px;
+  }
+  .pitch-box p{
+    font-size:1.08rem;
+    color:var(--text);
+  }
+  .pitch-box .prompt{ color:var(--accent); font-family:var(--mono); }
+
+  .cta-row{ margin-top:28px; display:flex; gap:14px; flex-wrap:wrap; }
+  .btn{
+    font-family:var(--mono);
+    font-size:0.88rem;
+    padding:12px 22px;
+    border-radius:6px;
+    border:1px solid var(--accent);
+    color:var(--accent);
+    background:transparent;
+    text-decoration:none;
+    display:inline-block;
+    transition:background .2s ease, color .2s ease;
+  }
+  .btn:hover{ background:var(--accent); color:#0D1117; }
+
+  /* ---------- Audio player ---------- */
+  .audio-player{
+    margin-top:24px;
+    display:flex;
+    align-items:center;
+    gap:16px;
+    padding:14px 18px;
+    background:var(--bg);
+    border:1px solid var(--border);
+    border-radius:8px;
+  }
+  .audio-toggle{
+    flex:none;
+    width:42px; height:42px;
+    border-radius:50%;
+    border:1px solid var(--accent);
+    background:transparent;
+    color:var(--accent);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:background .2s ease, color .2s ease, transform .15s ease;
+  }
+  .audio-toggle:hover{ background:var(--accent); color:#0D1117; }
+  .audio-toggle:active{ transform:scale(0.94); }
+  .audio-toggle svg{ width:16px; height:16px; }
+
+  .audio-meta{ flex:1; min-width:0; }
+  .audio-label{
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--text-dim);
+    margin-bottom:8px;
+    display:flex;
+    justify-content:space-between;
+    gap:10px;
+  }
+  .audio-time{ color:var(--text-dim); flex:none; }
+
+  .audio-track{
+    position:relative;
+    height:4px;
+    border-radius:2px;
+    background:var(--border);
+    cursor:pointer;
+  }
+  .audio-progress{
+    position:absolute; left:0; top:0; bottom:0;
+    width:0%;
+    border-radius:2px;
+    background:var(--accent);
+  }
+  .audio-progress::after{
+    content:'';
+    position:absolute; right:-5px; top:50%;
+    transform:translateY(-50%);
+    width:10px; height:10px;
+    border-radius:50%;
+    background:var(--accent);
+    box-shadow:0 0 0 3px var(--accent-dim);
+    opacity:0;
+    transition:opacity .2s ease;
+  }
+  .audio-player:hover .audio-progress::after{ opacity:1; }
+
+  footer{
+    text-align:center;
+    padding:36px 0 48px;
+    font-family:var(--mono);
+    font-size:0.78rem;
+    color:var(--text-dim);
+    position:relative; z-index:1;
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    html{ scroll-behavior:auto; }
+    .reveal{ transition:none; opacity:1; transform:none; }
+    .tag:hover{ transform:none; }
+    .cursor{ animation:none; }
+  }
+
+  :focus-visible{
+    outline:2px solid var(--accent);
+    outline-offset:2px;
+  }
+</style>
+</head>
+<body>
+
+<nav class="tabbar" id="tabbar">
+  <button class="tab active" data-target="hero"><span class="dot"></span>inicio.md</button>
+  <button class="tab" data-target="mision"><span class="dot"></span>identidad.md</button>
+  <button class="tab" data-target="skills"><span class="dot"></span>skills.json</button>
+  <button class="tab" data-target="portafolio"><span class="dot"></span>portafolio/</button>
+  <button class="tab" data-target="pitch"><span class="dot"></span>pitch.txt</button>
+</nav>
+
+<main>
+
+  <section class="hero" id="hero">
+    <div class="terminal">
+      <div class="terminal-head">
+        <span style="background:#ff5f56"></span>
+        <span style="background:#ffbd2e"></span>
+        <span style="background:#27c93f"></span>
+        <span class="path">~/portafolio/desarrollador.js</span>
+      </div>
+      <div class="terminal-body" id="typewriter"></div>
+    </div>
+    <h1>Fredy Enrrique<br>Acosta Paz</h1>
+    <p class="role-line">Ingeniero de Sistemas <span class="punct">&amp;</span> <strong>Desarrollador de Software</strong></p>
+  </section>
+
+  <section id="mision">
+    <h2>Identidad profesional <span class="ext">// misión, visión y propuesta de valor</span></h2>
+    <div class="triad reveal">
+      <div class="triad-item">
+        <div class="label">MISIÓN</div>
+        <p>Diseñar y desarrollar soluciones de software eficientes y centradas en el usuario, integrando conocimientos de ingeniería con herramientas modernas.</p>
+      </div>
+      <div class="triad-item">
+        <div class="label">VISIÓN</div>
+        <p>Consolidarme como un referente de innovación tecnológica en el Caribe colombiano mediante código escalable y de alta calidad técnica.</p>
+      </div>
+      <div class="triad-item">
+        <div class="label">PROPUESTA DE VALOR</div>
+        <p>Fusión de formación académica universitaria con experiencia real en entornos de desarrollo para empresas extranjeras, aportando estándares internacionales a soluciones locales.</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <h2>Competencias <span class="ext">// stack técnico</span></h2>
+    <div class="skill-group reveal">
+      <div class="cat">desarrollo móvil y web</div>
+      <div class="tags">
+        <span class="tag">React Native</span>
+        <span class="tag">Expo</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">Node.js</span>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="cat">herramientas y entornos</div>
+      <div class="tags">
+        <span class="tag">Git</span>
+        <span class="tag">GitHub</span>
+        <span class="tag">GitHub Copilot</span>
+        <span class="tag">VS Code</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="portafolio">
+    <h2>Portafolio <span class="ext">// proyectos y trayectoria</span></h2>
+    <div class="filelist">
+      <div class="fileitem reveal">
+        <span class="fname">mobile-apps.tsx</span>
+        <span class="fdesc">Proyectos de desarrollo móvil interactivos
+          <small>React Native &amp; TypeScript</small>
+        </span>
+      </div>
+      <div class="fileitem reveal">
+        <span class="fname">water-network-sim.py</span>
+        <span class="fdesc">Modelos de simulación de sistemas
+          <small>Distribución de agua en La Guajira</small>
+        </span>
+      </div>
+      <div class="fileitem reveal">
+        <span class="fname">community-innovation.md</span>
+        <span class="fdesc">Documentación de innovación comunitaria
+          <small>Ferias de ciencia</small>
+        </span>
+      </div>
+      <div class="fileitem reveal">
+        <span class="fname">international-collab.log</span>
+        <span class="fdesc">Trayectoria de colaboración internacional
+          <small>Desarrollo para empresas extranjeras</small>
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <section id="pitch">
+    <h2>Elevator pitch <span class="ext">// resumen ejecutivo</span></h2>
+    <div class="pitch-box reveal">
+      <div class="tag-label">$ cat pitch.txt</div>
+      <p>"Hola, soy Fredy Acosta, estudiante de ingeniería de sistemas y desarrollador de software. Me especializo en crear aplicaciones móviles modernas con React Native y TypeScript. Combino mi formación académica con experiencia desarrollando plataformas para empresas extranjeras, aportando código limpio y escalable para resolver problemas reales. Actualmente busco expandir mi impacto tecnológico, <span class="prompt">¿te interesaría explorar mi repositorio</span> para ver cómo estructuro mis interfaces?"</p>
+      <div class="cta-row">
+        <a href="#" class="btn">Ver repositorio</a>
+        <a href="#" class="btn">Contactar</a>
+      </div>
+
+      <div class="audio-player">
+        <button class="audio-toggle" id="audioToggle" aria-label="Reproducir pitch narrado">
+          <svg id="iconPlay" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>
+          <svg id="iconPause" viewBox="0 0 24 24" fill="currentColor" style="display:none"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+        </button>
+        <div class="audio-meta">
+          <div class="audio-label">
+            <span>escuchar pitch narrado</span>
+            <span class="audio-time"><span id="audioCurrent">0:00</span> / <span id="audioDuration">0:00</span></span>
+          </div>
+          <div class="audio-track" id="audioTrack">
+            <div class="audio-progress" id="audioProgress"></div>
+          </div>
+        </div>
+        <audio id="pitchAudio" src="audio/pitch.mp3" preload="metadata"></audio>
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<footer>Fredy Enrrique Acosta Paz — construido con HTML, CSS &amp; JS puro</footer>
+
+<script>
+  // Reveal on scroll
+  const revealEls = document.querySelectorAll('.reveal');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.15, rootMargin: '0px 0px -60px 0px' });
+  revealEls.forEach(el => io.observe(el));
+
+  // Tab active state on scroll
+  const tabs = document.querySelectorAll('.tab');
+  const sections = [...tabs].map(t => document.getElementById(t.dataset.target));
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      document.getElementById(tab.dataset.target).scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  const navObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const id = entry.target.id;
+        tabs.forEach(t => t.classList.toggle('active', t.dataset.target === id));
+      }
+    });
+  }, { threshold: 0.4, rootMargin: '-80px 0px -50% 0px' });
+  sections.forEach(sec => sec && navObserver.observe(sec));
+
+  // Terminal typewriter effect
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const tw = document.getElementById('typewriter');
+  const codeLines = [
+    { pre: 'const ', mid: 'developer', post: ' = {' },
+    { indent: 1, pre: '', key: 'name', val: 'Fredy Enrrique Acosta Paz' },
+    { indent: 1, pre: '', key: 'role', val: 'Ingeniero de Sistemas & Dev' },
+    { indent: 1, pre: '', key: 'stack', val: 'React Native, TypeScript, Node.js' },
+    { indent: 1, pre: '', key: 'base', val: 'Caribe colombiano \uD83C\uDF0A' },
+    { close: true }
+  ];
+
+  function renderStatic() {
+    let html = '<span class="key">const</span> developer <span class="punct">= {</span><br>';
+    html += '&nbsp;&nbsp;name: <span class="str">"Fredy Enrrique Acosta Paz"</span>,<br>';
+    html += '&nbsp;&nbsp;role: <span class="str">"Ingeniero de Sistemas &amp; Dev"</span>,<br>';
+    html += '&nbsp;&nbsp;stack: <span class="str">"React Native, TypeScript, Node.js"</span>,<br>';
+    html += '&nbsp;&nbsp;base: <span class="str">"Caribe colombiano"</span><br>';
+    html += '<span class="punct">}</span>';
+    tw.innerHTML = html;
+  }
+
+  if (prefersReduced) {
+    renderStatic();
+  } else {
+    const fullLines = [
+      '<span class="key">const</span> developer <span class="punct">= {</span>',
+      '&nbsp;&nbsp;name: <span class="str">"Fredy Enrrique Acosta Paz"</span>,',
+      '&nbsp;&nbsp;role: <span class="str">"Ingeniero de Sistemas &amp; Dev"</span>,',
+      '&nbsp;&nbsp;stack: <span class="str">"React Native, TypeScript, Node.js"</span>,',
+      '&nbsp;&nbsp;base: <span class="str">"Caribe colombiano"</span>',
+      '<span class="punct">}</span>'
+    ];
+
+    let lineIndex = 0;
+    let built = '';
+
+    function typeLine() {
+      if (lineIndex >= fullLines.length) {
+        tw.innerHTML = built + '<span class="cursor"></span>';
+        return;
+      }
+      built += (lineIndex > 0 ? '<br>' : '') + fullLines[lineIndex];
+      tw.innerHTML = built + '<span class="cursor"></span>';
+      lineIndex++;
+      setTimeout(typeLine, 260);
+    }
+    setTimeout(typeLine, 300);
+  }
+
+  // Audio player (elevator pitch narrado)
+  const audio = document.getElementById('pitchAudio');
+  const toggleBtn = document.getElementById('audioToggle');
+  const iconPlay = document.getElementById('iconPlay');
+  const iconPause = document.getElementById('iconPause');
+  const track = document.getElementById('audioTrack');
+  const progress = document.getElementById('audioProgress');
+  const currentEl = document.getElementById('audioCurrent');
+  const durationEl = document.getElementById('audioDuration');
+
+  function formatTime(sec) {
+    if (!isFinite(sec)) return '0:00';
+    const m = Math.floor(sec / 60);
+    const s = Math.floor(sec % 60).toString().padStart(2, '0');
+    return `${m}:${s}`;
+  }
+
+  toggleBtn.addEventListener('click', () => {
+    if (audio.paused) {
+      audio.play().catch(() => {
+        // No hay archivo de audio cargado todavía en audio/pitch.mp3
+        console.warn('No se pudo reproducir: agrega tu archivo en audio/pitch.mp3');
+      });
+    } else {
+      audio.pause();
+    }
+  });
+
+  audio.addEventListener('play', () => {
+    iconPlay.style.display = 'none';
+    iconPause.style.display = 'block';
+  });
+
+  audio.addEventListener('pause', () => {
+    iconPlay.style.display = 'block';
+    iconPause.style.display = 'none';
+  });
+
+  audio.addEventListener('ended', () => {
+    iconPlay.style.display = 'block';
+    iconPause.style.display = 'none';
+    progress.style.width = '0%';
+  });
+
+  audio.addEventListener('loadedmetadata', () => {
+    durationEl.textContent = formatTime(audio.duration);
+  });
+
+  audio.addEventListener('timeupdate', () => {
+    currentEl.textContent = formatTime(audio.currentTime);
+    if (audio.duration) {
+      progress.style.width = `${(audio.currentTime / audio.duration) * 100}%`;
+    }
+  });
+
+  track.addEventListener('click', (e) => {
+    const rect = track.getBoundingClientRect();
+    const ratio = (e.clientX - rect.left) / rect.width;
+    if (audio.duration) {
+      audio.currentTime = ratio * audio.duration;
+    }
+  });
+</script>
+
+</body>
+</html>
