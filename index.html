@@ -212,8 +212,10 @@
     border-radius:6px;
     background:var(--surface);
     color:var(--text);
+    text-decoration:none;
+    display:inline-block;
     transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease;
-    cursor:default;
+    cursor:pointer;
   }
   .tag:hover{
     transform:translateY(-4px);
@@ -232,6 +234,8 @@
     border:1px solid var(--border);
     border-radius:8px;
     margin-bottom:10px;
+    text-decoration:none;
+    color:inherit;
     transition:border-color .2s ease, background .2s ease;
   }
   .fileitem:hover{ border-color:var(--accent); background:var(--surface-hi); }
@@ -243,6 +247,20 @@
   }
   .fileitem .fdesc{ font-size:0.92rem; color:var(--text); }
   .fileitem .fdesc small{ display:block; color:var(--text-dim); margin-top:4px; font-size:0.82rem; }
+
+  .view-all{
+    display:inline-flex;
+    align-items:center;
+    gap:8px;
+    margin-top:6px;
+    font-family:var(--mono);
+    font-size:0.85rem;
+    color:var(--accent);
+    text-decoration:none;
+    border-bottom:1px solid transparent;
+    transition:border-color .2s ease;
+  }
+  .view-all:hover{ border-color:var(--accent); }
 
   @media (max-width:640px){
     .fileitem{ grid-template-columns:1fr; gap:6px; }
@@ -347,6 +365,45 @@
   }
   .audio-player:hover .audio-progress::after{ opacity:1; }
 
+  /* ---------- Contacto / redes ---------- */
+  .contact-grid{
+    display:grid;
+    grid-template-columns:repeat(2, 1fr);
+    gap:12px;
+  }
+  .contact-item{
+    display:flex;
+    flex-direction:column;
+    gap:6px;
+    padding:18px 20px;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:8px;
+    text-decoration:none;
+    color:inherit;
+    transition:border-color .2s ease, background .2s ease, transform .2s ease;
+  }
+  .contact-item:hover{
+    border-color:var(--accent);
+    background:var(--surface-hi);
+    transform:translateY(-3px);
+  }
+  .contact-item .c-label{
+    font-family:var(--mono);
+    font-size:0.72rem;
+    color:var(--accent);
+    letter-spacing:0.02em;
+  }
+  .contact-item .c-value{
+    font-size:0.95rem;
+    color:var(--text);
+    word-break:break-word;
+  }
+
+  @media (max-width:640px){
+    .contact-grid{ grid-template-columns:1fr; }
+  }
+
   footer{
     text-align:center;
     padding:36px 0 48px;
@@ -376,6 +433,7 @@
   <button class="tab" data-target="mision"><span class="dot"></span>identidad.md</button>
   <button class="tab" data-target="skills"><span class="dot"></span>skills.json</button>
   <button class="tab" data-target="portafolio"><span class="dot"></span>portafolio/</button>
+  <button class="tab" data-target="contacto"><span class="dot"></span>contacto.json</button>
   <button class="tab" data-target="pitch"><span class="dot"></span>pitch.txt</button>
 </nav>
 
@@ -418,50 +476,97 @@
     <div class="skill-group reveal">
       <div class="cat">desarrollo móvil y web</div>
       <div class="tags">
-        <span class="tag">React Native</span>
-        <span class="tag">Expo</span>
-        <span class="tag">TypeScript</span>
-        <span class="tag">Node.js</span>
+        <a class="tag" href="https://reactnative.dev/" target="_blank" rel="noopener">React Native</a>
+        <a class="tag" href="https://expo.dev/" target="_blank" rel="noopener">Expo</a>
+        <a class="tag" href="https://www.typescriptlang.org/" target="_blank" rel="noopener">TypeScript</a>
+        <a class="tag" href="https://nodejs.org/" target="_blank" rel="noopener">Node.js</a>
       </div>
     </div>
     <div class="skill-group reveal">
       <div class="cat">herramientas y entornos</div>
       <div class="tags">
-        <span class="tag">Git</span>
-        <span class="tag">GitHub</span>
-        <span class="tag">GitHub Copilot</span>
-        <span class="tag">VS Code</span>
+        <a class="tag" href="https://git-scm.com/" target="_blank" rel="noopener">Git</a>
+        <a class="tag" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
+        <a class="tag" href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot</a>
+        <a class="tag" href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a>
       </div>
     </div>
   </section>
 
   <section id="portafolio">
-    <h2>Portafolio <span class="ext">// proyectos y trayectoria</span></h2>
+    <h2>Portafolio <span class="ext">// repositorios en GitHub</span></h2>
     <div class="filelist">
-      <div class="fileitem reveal">
-        <span class="fname">mobile-apps.tsx</span>
-        <span class="fdesc">Proyectos de desarrollo móvil interactivos
-          <small>React Native &amp; TypeScript</small>
+      <a class="fileitem reveal" href="https://github.com/fredy-acosta/fredy-acosta.github.io" target="_blank" rel="noopener">
+        <span class="fname">fredy-acosta.github.io</span>
+        <span class="fdesc">Portafolio y brandbook personal (este sitio)
+          <small>HTML</small>
         </span>
-      </div>
-      <div class="fileitem reveal">
-        <span class="fname">water-network-sim.py</span>
-        <span class="fdesc">Modelos de simulación de sistemas
-          <small>Distribución de agua en La Guajira</small>
+      </a>
+      <a class="fileitem reveal" href="https://github.com/fredy-acosta/mi-perfil-dev" target="_blank" rel="noopener">
+        <span class="fname">mi-perfil-dev</span>
+        <span class="fdesc">Proyecto de perfil de desarrollador
+          <small>TypeScript</small>
         </span>
-      </div>
-      <div class="fileitem reveal">
-        <span class="fname">community-innovation.md</span>
-        <span class="fdesc">Documentación de innovación comunitaria
-          <small>Ferias de ciencia</small>
+      </a>
+      <a class="fileitem reveal" href="https://github.com/fredy-acosta/DM-2026-II" target="_blank" rel="noopener">
+        <span class="fname">DM-2026-II</span>
+        <span class="fdesc">Proyecto académico
+          <small>TypeScript</small>
         </span>
-      </div>
-      <div class="fileitem reveal">
-        <span class="fname">international-collab.log</span>
-        <span class="fdesc">Trayectoria de colaboración internacional
-          <small>Desarrollo para empresas extranjeras</small>
+      </a>
+      <a class="fileitem reveal" href="https://github.com/fredy-acosta/Desarrollo_web_2026-1" target="_blank" rel="noopener">
+        <span class="fname">Desarrollo_web_2026-1</span>
+        <span class="fdesc">Proyecto de desarrollo web
+          <small>TypeScript</small>
         </span>
-      </div>
+      </a>
+      <a class="fileitem reveal" href="https://github.com/fredy-acosta/django_2025" target="_blank" rel="noopener">
+        <span class="fname">django_2025</span>
+        <span class="fdesc">Proyecto con Django
+          <small>Python</small>
+        </span>
+      </a>
+      <a class="fileitem reveal" href="https://github.com/fredy-acosta/Data-Base-Mysql-y-Postgres" target="_blank" rel="noopener">
+        <span class="fname">Data-Base-Mysql-y-Postgres</span>
+        <span class="fdesc">Proyecto de bases de datos
+          <small>MySQL &amp; PostgreSQL</small>
+        </span>
+      </a>
+      <a class="fileitem reveal" href="https://github.com/fredy-acosta/Parcia-Final" target="_blank" rel="noopener">
+        <span class="fname">Parcia-Final</span>
+        <span class="fdesc">Proyecto académico
+          <small>Parcial final</small>
+        </span>
+      </a>
+      <a class="fileitem reveal" href="https://github.com/fredy-acosta/Galeria-Proyecto" target="_blank" rel="noopener">
+        <span class="fname">Galeria-Proyecto</span>
+        <span class="fdesc">Galería de proyecto
+          <small>Python</small>
+        </span>
+      </a>
+    </div>
+    <a class="view-all reveal" href="https://github.com/fredy-acosta?tab=repositories" target="_blank" rel="noopener">Ver todos mis repositorios →</a>
+  </section>
+
+  <section id="contacto">
+    <h2>Contacto <span class="ext">// redes y medios</span></h2>
+    <div class="contact-grid reveal">
+      <a class="contact-item" href="mailto:acostapazfredyenrique@gmail.com">
+        <span class="c-label">email</span>
+        <span class="c-value">acostapazfredyenrique@gmail.com</span>
+      </a>
+      <a class="contact-item" href="https://www.instagram.com/boka_2708" target="_blank" rel="noopener">
+        <span class="c-label">instagram</span>
+        <span class="c-value">@boka_2708</span>
+      </a>
+      <a class="contact-item" href="https://www.linkedin.com/in/fredy-acosta-0ba736435" target="_blank" rel="noopener">
+        <span class="c-label">linkedin</span>
+        <span class="c-value">fredy-acosta-0ba736435</span>
+      </a>
+      <a class="contact-item" href="https://wa.me/573013442989" target="_blank" rel="noopener">
+        <span class="c-label">whatsapp</span>
+        <span class="c-value">+57 301 344 2989</span>
+      </a>
     </div>
   </section>
 
@@ -471,8 +576,8 @@
       <div class="tag-label">$ cat pitch.txt</div>
       <p>"Hola, soy Fredy Acosta, estudiante de ingeniería de sistemas y desarrollador de software. Me especializo en crear aplicaciones móviles modernas con React Native y TypeScript. Combino mi formación académica con experiencia desarrollando plataformas para empresas extranjeras, aportando código limpio y escalable para resolver problemas reales. Actualmente busco expandir mi impacto tecnológico, <span class="prompt">¿te interesaría explorar mi repositorio</span> para ver cómo estructuro mis interfaces?"</p>
       <div class="cta-row">
-        <a href="#" class="btn">Ver repositorio</a>
-        <a href="#" class="btn">Contactar</a>
+        <a href="https://github.com/fredy-acosta/fredy-acosta.github.io" class="btn" target="_blank" rel="noopener">Ver repositorio</a>
+        <a href="#contacto" class="btn">Contactar</a>
       </div>
 
       <div class="audio-player">
