@@ -231,6 +231,7 @@
     border-color:var(--accent);
     box-shadow:0 10px 24px -8px var(--accent-dim), 0 0 0 1px var(--accent-dim);
   }
+  span.tag{ cursor:default; }
 
   /* ---------- Portfolio / file list ---------- */
   .filelist{ display:flex; flex-direction:column; gap:2px; }
@@ -481,7 +482,13 @@
   </section>
 
   <section id="mision">
-    <h2>Identidad profesional <span class="ext">// misión, visión y propuesta de valor</span></h2>
+    <h2>Identidad profesional <span class="ext">// área de interés, misión, visión y propuesta de valor</span></h2>
+    <div class="triad reveal" style="grid-template-columns:1fr; margin-bottom:12px;">
+      <div class="triad-item">
+        <div class="label">ÁREA DE INTERÉS PROFESIONAL</div>
+        <p>Ingeniería de software para impacto social: construir soluciones tecnológicas que respondan a problemas reales de comunidades como la mía, en La Guajira.</p>
+      </div>
+    </div>
     <div class="triad reveal">
       <div class="triad-item">
         <div class="label">MISIÓN</div>
@@ -548,6 +555,17 @@
         <a class="tag" href="https://github.com/" target="_blank" rel="noopener">GitHub</a>
         <a class="tag" href="https://github.com/features/copilot" target="_blank" rel="noopener">GitHub Copilot</a>
         <a class="tag" href="https://code.visualstudio.com/" target="_blank" rel="noopener">VS Code</a>
+      </div>
+    </div>
+    <div class="skill-group reveal">
+      <div class="cat">habilidades blandas</div>
+      <div class="tags">
+        <span class="tag">Trabajo en equipo</span>
+        <span class="tag">Comunicación efectiva</span>
+        <span class="tag">Adaptabilidad</span>
+        <span class="tag">Resolución de problemas</span>
+        <span class="tag">Pensamiento crítico e inquisitivo</span>
+        <span class="tag">Pensamiento sistémico</span>
       </div>
     </div>
   </section>
@@ -633,7 +651,7 @@
     <h2>Elevator pitch <span class="ext">// resumen ejecutivo</span></h2>
     <div class="pitch-box reveal">
       <div class="tag-label">$ cat pitch.txt</div>
-      <p>"¿Sabías que se puede programar el futuro de La Guajira? Soy Fredy Acosta, desarrollador de software. Ayudo a empresas que necesitan apps rápidas y escalables con React Native, TypeScript y Node.js, aplicando estándares que aprendí con empresas extranjeras. Entrego código limpio y funcional, como el modelo de distribución de agua que desarrollé para mi región. Si buscas resultados reales, <span class="prompt">te invito a explorar mi repositorio</span>."</p>
+      <p>"Hola, soy Fredy Acosta, estudiante de Ingeniería de Sistemas en la Universidad de La Guajira. Me especializo en desarrollo de software con React Native, TypeScript, Node.js y Angular, además de bases de datos como MySQL y PostgreSQL. He aplicado estos conocimientos en proyectos reales, incluyendo colaboraciones con empresas extranjeras y un modelo de simulación de distribución de agua para mi región. <span class="prompt">Me interesa desarrollarme profesionalmente en la ingeniería de software para impacto social</span>, construyendo soluciones tecnológicas que resuelvan problemas reales de comunidades como la mía."</p>
       <div class="cta-row">
         <a href="https://github.com/fredy-acosta/fredy-acosta.github.io" class="btn" target="_blank" rel="noopener">Ver repositorio</a>
         <a href="#contacto" class="btn">Contactar</a>
